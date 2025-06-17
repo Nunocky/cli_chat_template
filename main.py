@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 
 from cli_chatbot import CLIChatbot
@@ -11,31 +12,34 @@ def custom_processor(user_input: str):
         time.sleep(0.02)
 
 
-def on_start_callback():
-    print("🤖 チャットボットが開始されました！")
+def on_start_callback(chatbot: CLIChatbot):
+    chatbot.print("🤖 チャットボットが開始されました！")
+    chatbot.print(
+        "[green]CLI Chatbot started. Type '/quit' or press Ctrl-D to exit.[/green]"
+    )
 
 
-def on_input_callback(user_input: str):
-    print(f"📝 入力を受信: {len(user_input)}文字")
+def on_input_callback(chatbot: CLIChatbot, user_input: str):
+    chatbot.print(f"📝 入力を受信: {len(user_input)}文字")
 
 
-def on_output_callback(output: str):
-    print(f"📤 出力完了: {len(output)}文字")
+def on_output_callback(chatbot: CLIChatbot, output: str):
+    chatbot.print(f"📤 出力完了: {len(output)}文字")
 
 
-def on_exit_callback():
-    print("👋 チャットボットを終了します")
+def on_exit_callback(chatbot: CLIChatbot):
+    chatbot.print("\n👋 [yellow]チャットボットを終了します[/yellow]")
 
 
-def on_error_callback(error: Exception):
-    print(f"❌ エラーが発生しました: {error}")
+def on_error_callback(chatbot: CLIChatbot, error: Exception):
+    chatbot.print(f"❌ エラーが発生しました: {error}")
 
 
 def main():
     # チャットボットインスタンスを作成
     chatbot = CLIChatbot()
 
-    # chatbot.set_prompt("> ")
+    chatbot.set_prompt("> ")
     # コールバック関数を設定
     chatbot.set_on_start(on_start_callback)
     chatbot.set_on_input(on_input_callback)
