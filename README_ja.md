@@ -1,5 +1,7 @@
 # CLI Chat Template
 
+[English](README.md) | [日本語](README_ja.md)
+
 Python で書かれた CLI チャットインターフェースのテンプレート
 
 ## 機能
