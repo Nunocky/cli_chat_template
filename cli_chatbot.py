@@ -12,6 +12,7 @@ class CLIChatbot:
     def __init__(self):
         self.console = Console()
         self.running = False
+        self.ps1 = "[green]You: [/green]"  # Default prompt
 
         # Callback functions
         self.on_start: Optional[Callable[[], None]] = None
@@ -42,6 +43,10 @@ class CLIChatbot:
         for char in response:
             yield char
             time.sleep(0.01)  # Simulate streaming
+
+    def set_prompt(self, prompt: str):
+        """Set the input prompt for the chatbot"""
+        self.ps1 = prompt
 
     def set_processor(self, processor: Callable[[str], Generator[str, None, None]]):
         """Set the text processing function"""
@@ -122,7 +127,7 @@ class CLIChatbot:
             try:
                 # Get user input
                 if sys.stdin.isatty():
-                    self.console.print("You: ", end="")
+                    self.console.print(self.ps1, end="")
                     user_input = input().strip()
                 else:
                     # Non-interactive mode

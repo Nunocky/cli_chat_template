@@ -35,6 +35,7 @@ def main():
     # チャットボットインスタンスを作成
     chatbot = CLIChatbot()
 
+    # chatbot.set_prompt("> ")
     # コールバック関数を設定
     chatbot.set_on_start(on_start_callback)
     chatbot.set_on_input(on_input_callback)
